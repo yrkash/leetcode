@@ -21,6 +21,7 @@ public class Solution {
         int result = 0;
         String[] chars = s.split("");
         result += romanDecMap.get(chars[chars.length - 1]);
+        System.out.println("result =" + result);
         int prevValue = result;
         if (chars.length >= 2) {
             for (int i = chars.length - 2; i >= 0 ; i--) {
@@ -31,6 +32,7 @@ public class Solution {
                     result += curValue;
                 }
                 prevValue = curValue;
+                System.out.println("result =" + result);
             }
         }
         return result;
