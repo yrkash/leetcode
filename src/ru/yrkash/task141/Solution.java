@@ -8,17 +8,17 @@ public class Solution {
         }
 
         ListNode slow = head;
-        ListNode fast = head.next;
+        ListNode fast = head;
 
-        while (slow != fast) {
-            if (slow == null || fast == null) {
-                return false;
-            }
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
         }
-        return true;
 
+        return false;
     }
 
 
