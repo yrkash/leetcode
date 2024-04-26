@@ -15,8 +15,9 @@ public class Solution {
             int sum = firstArg + secondArg + overload;
             overload = sum / 10;
             sum %= 10;
-
+            // pointer for result remains
             curResult.next = new ListNode(sum);
+            // curResult move to new ListNode
             curResult = curResult.next;
 
             if (l1 != null) {

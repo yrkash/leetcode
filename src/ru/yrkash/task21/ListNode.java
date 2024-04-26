@@ -1,4 +1,4 @@
-package ru.yrkash.task2;
+package ru.yrkash.task21;
 
 //Definition for singly-linked list.
 public class ListNode {
