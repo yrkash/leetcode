@@ -3,6 +3,7 @@ package ru.yrkash.task61;
 
 public class Solution {
 
+
     public ListNode rotateRight(ListNode head, int k) {
 //        ListNode dummyNode = new ListNode(0, head);
         ListNode currentNode = head;
