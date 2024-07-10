@@ -1,4 +1,4 @@
-package ru.yrkash.task126;
+package ru.yrkash.task222;
 
 
 import java.util.LinkedList;
@@ -6,21 +6,30 @@ import java.util.Queue;
 
 public class Solution {
 
-    public int sumNumbers(TreeNode root) {
-        return depthFirstSearch(root, 0);
+   public int countNodes(TreeNode root) {
+
+        if (root == null) return 0;
+
+        int leftSubTreeDepth = findDepth(root.left);
+        int rightSubTreeDepth = findDepth(root.right);
+        // if depths equals then left tree - full
+        if (leftSubTreeDepth == rightSubTreeDepth) {
+            // 1 << depth  - bit manipulation. Find count of nodes in full subtree with local root. (2 ^ depth)
+
+            return (1 << leftSubTreeDepth) + countNodes(root.right);
+        } else {
+            return (1 << rightSubTreeDepth) + countNodes(root.left);
+        }
     }
 
-    public int depthFirstSearch(TreeNode node, int sum) {
-        if (node == null) return 0;
+    private int findDepth(TreeNode node) {
+        int depth = 0;
 
-        sum = sum * 10 + node.val;
-
-        if (node.left == null && node.right == null) {
-            System.out.println(sum);
-            return sum;
+        while (node != null) {
+            depth++;
+            node = node.left;
         }
-
-        return depthFirstSearch(node.left, sum) + depthFirstSearch(node.right, sum);
+        return depth;
     }
 
     public TreeNode initializeTree(String rootStr) {
@@ -62,11 +71,11 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        String treeInitStr = "[4,9,0,5,1]";
+        String treeInitStr = "[1,2,3,4,5,6,null]";
 
         TreeNode treeNode = solution.initializeTree(treeInitStr);
 
-        System.out.println(solution.sumNumbers(treeNode));
+        System.out.println(solution.countNodes(treeNode));
         System.out.println(treeNode.left);
         System.out.println(treeNode.right.val);
 
