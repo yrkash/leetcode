@@ -1,42 +1,11 @@
-package ru.yrkash.task102;
+package ru.yrkash.task103;
 
 
 import java.util.*;
 
 public class Solution {
 
-
-    public List<Double> averageOfLevels(TreeNode root) {
-        List<Double> result = new ArrayList<>();
-
-        if (root == null) {
-            return result;
-        }
-
-        Deque<TreeNode> deque = new ArrayDeque<>();
-        deque.offer(root);
-        double curSum = root.val;
-        while (!deque.isEmpty()) {
-            result.add(curSum / deque.size());
-            curSum = 0.0;
-            for (int i = deque.size(); i > 0; i--) {
-
-                TreeNode node = deque.poll();
-                if (node.left != null) {
-                    deque.offer(node.left);
-                    curSum += node.left.val;
-                }
-                if (node.right != null) {
-                    deque.offer(node.right);
-                    curSum += node.right.val;
-                }
-            }
-
-        }
-        return result;
-    }
-
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
 
         if (root == null) {
@@ -47,8 +16,13 @@ public class Solution {
         deque.offer(root);
         List<Integer> curLevel = new ArrayList<>();
         curLevel.add(root.val);
+        boolean leftRightFlag = true;
         while (!deque.isEmpty()) {
+            if (!leftRightFlag) {
+                Collections.reverse(curLevel);
+            }
             result.add(curLevel);
+            leftRightFlag = !leftRightFlag;
             curLevel = new ArrayList<>();
             for (int i = deque.size(); i > 0; i--) {
 
@@ -65,7 +39,6 @@ public class Solution {
         }
         return result;
     }
-
 
     public TreeNode initializeTree(String rootStr) {
         // Разбить строку на список узлов
@@ -103,13 +76,12 @@ public class Solution {
         return root;
     }
 
-
     public static void main(String[] args) {
         Solution solution = new Solution();
         String treeInitStr = "[1,2,3,4,5,6,7]";
 
         TreeNode treeNode = solution.initializeTree(treeInitStr);
-        List<List<Integer>> result = solution.levelOrder(treeNode);
+        List<List<Integer>> result = solution.zigzagLevelOrder(treeNode);
         System.out.println(result.get(0));
         System.out.println(result.get(1));
         System.out.println(result.get(2));

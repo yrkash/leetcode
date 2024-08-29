@@ -6,6 +6,36 @@ import java.util.*;
 public class Solution {
 
 
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        if (root == null) {
+            return result;
+        }
+
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.offer(root);
+        List<Integer> curLevel = new ArrayList<>();
+        curLevel.add(root.val);
+        while (!deque.isEmpty()) {
+            result.add(curLevel);
+            curLevel = new ArrayList<>();
+            for (int i = deque.size(); i > 0; i--) {
+
+                TreeNode node = deque.poll();
+                if (node.left != null) {
+                    deque.offer(node.left);
+                    curLevel.add(node.left.val);
+                }
+                if (node.right != null) {
+                    deque.offer(node.right);
+                    curLevel.add(node.right.val);
+                }
+            }
+        }
+        return result;
+    }
+
     public List<Double> averageOfLevels(TreeNode root) {
         List<Double> result = new ArrayList<>();
 
@@ -79,7 +109,7 @@ public class Solution {
         String treeInitStr = "[1,2,3,4,5,6,7]";
 
         TreeNode treeNode = solution.initializeTree(treeInitStr);
-        List<Double> result = solution.averageOfLevels(treeNode);
+        List<List<Integer>> result = solution.levelOrder(treeNode);
         System.out.println(result.get(0));
         System.out.println(result.get(1));
         System.out.println(result.get(2));
