@@ -56,8 +56,6 @@ public class Solution {
             return new int[0];
         }
     }
-
-
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         // Create a graph represented by an adjacency list where each course points to its prerequisites
         List<List<Integer>> graph = new ArrayList<>();
@@ -108,7 +106,6 @@ public class Solution {
         // If the number of processed courses equals the total number of courses, all can be finished
         return processedCourses == numCourses;
     }
-
 
     public static void main(String[] args) {
         Solution solution = new Solution();
